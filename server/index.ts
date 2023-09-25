@@ -2,7 +2,6 @@ import express from "express";
 import { Server, Socket } from "socket.io";
 import { createServer } from "http";
 import cors from "cors";
-import { instrument } from "@socket.io/admin-ui";
 import { ClientToServerEvents, ServerToClientEvents } from "../typings";
 
 const app = express();
@@ -15,11 +14,6 @@ const io = new Server<ClientToServerEvents, ServerToClientEvents>(server, {
 		methods: ["GET", "POST"],
 		credentials: true,
 	},
-});
-
-instrument(io, {
-	auth: false,
-	mode: "development",
 });
 
 io.on(
